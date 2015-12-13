@@ -35,7 +35,7 @@ selected_data <- data[data$fulldate > "2007-02-01" & data$fulldate < "2007-02-03
 png(filename = "plot3.png", width = 480, height = 480)
 
 # set type = "l" to plot lines instead of points
-with(selected_data, plot(fulldate, Sub_metering_1, type = "l", col = "Black", xlab = "", ylab = "Global Active Power (kilowatts)"))
+with(selected_data, plot(fulldate, Sub_metering_1, type = "l", col = "Black", xlab = "", ylab = "Energy sub metering"))
 with(selected_data, lines(fulldate, Sub_metering_2, type = "l", col = "Red"))
 with(selected_data, lines(fulldate, Sub_metering_3, type = "l", col = "Blue"))
 legend("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
