@@ -1,6 +1,11 @@
 rm(list = ls())
 ############################### Prepare the data #####################################
 
+## original data set download link
+## https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip
+
+unzip ("exdata-data-household_power_consumption.zip", exdir = ".")
+
 # read the data file
 data <- read.csv("./household_power_consumption.txt", sep = ";", stringsAsFactors = FALSE)
 
@@ -29,54 +34,7 @@ selected_data <- data[data$fulldate > "2007-02-01" & data$fulldate < "2007-02-03
 # highly recomend png() to copy the plot, because dev2copy() does not save a 100% identical image
 png(filename = "plot1.png", width = 480, height = 480)
 
-hist(selected_data$Global_active_power, col = "Red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
-
-dev.off()
-
-## Plot 2
-
-png(filename = "plot2.png", width = 480, height = 480)
-
-plot( selected_data$fulldate, selected_data$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
-
-#dev.copy(png, file = "plot2.png")
-
-dev.off()
-
-## Plot 3
-
-png(filename = "plot3.png", width = 480, height = 480)
-
-with(selected_data, plot(fulldate, Sub_metering_1, type = "l", col = "Black", xlab = "", ylab = "Global Active Power (kilowatts)"))
-with(selected_data, lines(fulldate, Sub_metering_2, type = "l", col = "Red"))
-with(selected_data, lines(fulldate, Sub_metering_3, type = "l", col = "Blue"))
-legend("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-
-dev.off()
-
-
-## Plot 4
-
-# recommend png() to save the plot, 100% authentic
-png(filename = "plot4.png", width = 480, height = 480)
-
-par(mfrow = c(2, 2), mar = c(4, 4, 2, 2), oma = c(1, 1, 1, 1))
-
-with(selected_data, {
-  
-  # set type = "l" to plot lines, instead of points
-  plot(fulldate, Global_active_power, type = "l", xlab = "", ylab = "Global Active Power")
-  plot(fulldate, Voltage, type = "l", xlab = "datetime")
-  
-  plot(fulldate, Sub_metering_1, type = "l", col = "Black", xlab = "", ylab = "Energy sub metering")
-  lines(fulldate, Sub_metering_2, type = "l", col = "Red")
-  lines(fulldate, Sub_metering_3, type = "l", col = "Blue")
-  
-  ## set bty = "n" to remove the legend border
-  legend("topright", bty = "n", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-  
-  
-  plot(fulldate, Global_reactive_power, type = "l", xlab = "datetime")
-})
+# set the color to the exact color in the coursera project exhibit, which is a little orange in red
+hist(selected_data$Global_active_power, col = "#FF2500", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
 
 dev.off()
